@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Сила и КБЖУ">
+  <title>Сила и КБЖУ</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a7bff"/>
+      <stop offset="1" stop-color="#1e4fd6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Фон: квадрат без скруглений — iOS сам скруглит иконку на домашнем экране -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Штанга: мотив вписан в центральную безопасную зону (для maskable) -->
+  <g fill="#ffffff">
+    <!-- гриф -->
+    <rect x="136" y="246" width="240" height="20" rx="10"/>
+    <!-- блины слева -->
+    <rect x="108" y="196" width="34" height="120" rx="12"/>
+    <rect x="76" y="226" width="26" height="60" rx="12"/>
+    <!-- блины справа -->
+    <rect x="370" y="196" width="34" height="120" rx="12"/>
+    <rect x="410" y="226" width="26" height="60" rx="12"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+# Мусор операционной системы и редактора — в репозиторий не нужен
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+*~
+
+# Локальные настройки VS Code
+.vscode/
+
+# Временные файлы и логи локального сервера
+*.log
+*.tmp
+
+# Личные резервные копии данных приложения: их место в «Файлах», а не в git
+sila-kbzhu-*.json
+
+# Windows PowerShell sometimes keeps Zone.Identifier sidecars
+*:Zone.Identifier

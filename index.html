@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Сила и КБЖУ</title>
+
+  <!--
+    Безопасность и приватность (этап 7).
+    1. referrer=no-referrer — адрес приложения (включая hash с названием вкладки)
+       не уходит на сторонние сайты в заголовке Referer.
+    2. CSP запрещает ЛЮБЫЕ внешние запросы: скрипты, стили, картинки, шрифты,
+       манифест, service worker и fetch — только со своего адреса.
+       Даже если в данные попадёт внешняя ссылка, браузер её не загрузит,
+       а данные не смогут «уехать» на чужой сервер.
+       default-src 'self' (а не 'none') — чтобы старые Safari, не знающие
+       worker-src, не заблокировали service worker.
+  -->
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; manifest-src 'self'; worker-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none';">
+
+  <!-- viewport-fit=cover обязателен, чтобы работали env(safe-area-inset-*) на iPhone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Личный дневник силовых тренировок и питания (КБЖУ)">
+
+  <!-- iOS: запуск в полноэкранном режиме после «Добавить на экран Домой» -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Сила и КБЖУ">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Цвет статус-бара / адресной строки под светлую и тёмную тему -->
+  <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Шапка: заголовок текущего экрана + место под кнопки экрана -->
+    <header class="app-header">
+      <h1 class="app-title" id="screen-title">Тренировки</h1>
+      <div class="app-header-actions" id="screen-actions"></div>
+    </header>
+
+    <main class="screens" id="screens">
+      <!-- Каждый экран — отдельная <section>. Содержимое рисует свой модуль. -->
+      <section class="screen" id="screen-workouts" hidden></section>
+      <section class="screen" id="screen-nutrition" hidden></section>
+      <section class="screen" id="screen-foods" hidden></section>
+      <section class="screen" id="screen-stats" hidden></section>
+      <section class="screen" id="screen-profile" hidden></section>
+    </main>
+
+    <!-- Нижняя навигация: крупные кнопки под палец -->
+    <nav class="tabbar" id="tabbar" aria-label="Основная навигация">
+      <button class="tab" type="button" data-tab="workouts">
+        <span class="tab-icon" aria-hidden="true">🏋️</span>
+        <span class="tab-label">Тренировки</span>
+      </button>
+      <button class="tab" type="button" data-tab="nutrition">
+        <span class="tab-icon" aria-hidden="true">🍽️</span>
+        <span class="tab-label">Питание</span>
+      </button>
+      <button class="tab" type="button" data-tab="foods">
+        <span class="tab-icon" aria-hidden="true">📚</span>
+        <span class="tab-label">Продукты</span>
+      </button>
+      <button class="tab" type="button" data-tab="stats">
+        <span class="tab-icon" aria-hidden="true">📊</span>
+        <span class="tab-label">Итоги</span>
+      </button>
+      <button class="tab" type="button" data-tab="profile">
+        <span class="tab-icon" aria-hidden="true">👤</span>
+        <span class="tab-label">Профиль</span>
+      </button>
+    </nav>
+  </div>
+
+  <noscript>
+    <p class="noscript-note">Для работы приложения нужен JavaScript.</p>
+  </noscript>
+
+  <!-- Точка входа: ES-модуль (работает только по http(s), не из file://) -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
